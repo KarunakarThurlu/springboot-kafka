@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.form-inline{
+  font-size: 23px; 
+}
+.nav-link{
+  font-size: 23px; 
+}
+.nav-item{
+  width: 125px;
+  
+}
+.nav-container nav ul {
+  white-space:nowrap;
+}
+
+.nav-container nav ul li {
+  min-width:55px;
+}
+.nav-container {
+  width: 100%;
+  position: fixed;
+
+}
+nav {
+  text-align: center;
+  width: 100%;
+  margin: 0px auto; 
+}
+nav ul {
+      padding: 0px; 
+    }
+nav li {
+    width: 24%;
+}
+
+    nav li a {
+        font-size: 16px;
+        font-family: Market;
+    }
+   nav li a.active {
+       text-decoration: none;
+       font-size: 200%;
+   }
+   nav li a.hover{
+  text-decoration: none; 
+  color: white;
+   } 
+
+   #register{
+     width: 400px;
+     font-family: Arial, Helvetica, sans-serif;
+     padding: 0px 15px 15px 15px;
+     line-height: 16px;
+     font-size: 14px;
+     margin:50px auto;
+   }
+   form label, form input{
+     display: block;
+     width: 90%
+   }
+   form input{
+     padding: 10px;
+     border: solid 1px #BDC7D8;
+   }
+   .button{
+     background-color:black;
+     border-color: beige;
+     font-weight: 100;
+     padding: 12px 15px;
+     color: #BDC7D8;
+   }
+   .errmsg{
+     color:red;
+     margin-bottom: 10px;
+   }
+   .successmsg{
+     color:green;
+     margin-bottom: 10px;
+   }
+
+   .nav-item{
+    padding: 10px;
+   
+  }
+    .link{
+        color: #333;
+        font-weight: 500;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 5px 15px;
+    
+       
+        }
+    

@@ -8,7 +8,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 public class SynchronusKafkaProducer {
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		System.out.println("hello");
 		String topicname="niharika";
 		String key="key";
@@ -35,5 +35,5 @@ public class SynchronusKafkaProducer {
 			producer.close();
 		}
 		System.out.println("message is sending from java-producer to kafka topic");
-	}
+	}*/
 }

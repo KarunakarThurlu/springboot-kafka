@@ -9,7 +9,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 public class AsynchronusKafkaProducer {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		System.out.println("hello");
 		String topicname="niharika";
 		String key="key";
@@ -43,6 +43,6 @@ class MyProducerCallBack implements Callback{
 			System.out.println("====Asynchronus message is sendded successfully=======");
 
 
-	}
+	}*/
 
 }
