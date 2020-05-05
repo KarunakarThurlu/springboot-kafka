@@ -1,26 +1,25 @@
 package com.kafka.controller;
 
 
-import org.json.simple.JSONArray;
+import java.io.Console;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kafka.iservice.IKafkaDataService;
 import com.kafka.iservice.IUserService;
 import com.kafka.model.User;
 import com.kafka.model.UsersData;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.client.MongoCollection;
 
 @RestController
 @RequestMapping("/kafka")
@@ -33,13 +32,10 @@ public class LoginController {
 	private IKafkaDataService kds;
 
 
-	@Autowired
-	MongoTemplate mongoTemplate;
-
 	@Value("${spring.data.mongodb.database}")
 	private String mongodb;
 
-	@Autowired
+	//@Autowired
 	private KafkaTemplate<String, String> kafkaTamplate;
 
 	public String getIndexPage() {
@@ -99,7 +95,7 @@ public class LoginController {
 
 
 	String rawdata=null;
-	@KafkaListener(groupId = "group1",topics = "niharika")
+	//@KafkaListener(groupId = "group1",topics = "niharika")
 	public String getDataFromTopic(String data) {
 		System.out.println(data);
 		rawdata=data;
@@ -118,26 +114,27 @@ public class LoginController {
 
 	@RequestMapping("/mongo")
 	public String saveTOMongoDB(@RequestBody String data) {
-		JSONParser parser =new JSONParser();
-		try {
-			JSONArray arry = (JSONArray) parser.parse(data);
-			UsersData ud=new UsersData();
-			for(int i=0;i<arry.size();i++) {
-				JSONObject obj=(JSONObject) arry.get(i);
-				ud.setId((String) obj.get("id"));
-				ud.setEmail((String) obj.get("email"));
-				ud.setFirst_name((String) obj.get("first_name"));
-				ud.setGender((String) obj.get("gender"));
-				ud.setIp_address((String) obj.get("ip_address"));
-				ud.setLast_name((String) obj.get("last_name"));
-				mongoTemplate.insert(ud);
-			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return "done";
+		System.out.println("======"+data+"==========");
+		String res=service.saveUserData(data);
+		return res;
+	}
+	
+	
+	@RequestMapping("/getOneuser")
+	@ResponseBody
+	public UsersData getOneUser(@RequestParam("name") String name) {
+		return service.getOneUser(name);
+	}
+	
+	@GetMapping("/auth")
+	public String getAuthoriseResource() {
+		return "private resource";
+	}
+	@RequestMapping("/userByEmail")
+	public String getUserDataByEmail(@RequestParam("email") String email) {
+		UsersData user=service.getOneUser(email);
+		System.out.println(user);
+		return "response";
 	}
 
 }

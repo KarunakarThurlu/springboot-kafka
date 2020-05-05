@@ -2,7 +2,7 @@ package com.kafka.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "usersData")
+@Document("usersData")
 public class UsersData {
 	
 	

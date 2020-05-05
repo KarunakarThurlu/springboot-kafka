@@ -1,0 +1,128 @@
+import React, { useState } from "react";
+import Table from "react-bootstrap/Table";
+import { useEffect } from "react";
+import axios from "axios";
+
+function UsersData() {
+  const [usersData, setusersData] = useState([]);
+  let [color, setColor] = useState("gray");
+  let [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://pomber.github.io/covid19/timeseries.json")
+      .then((res) => {
+        setData(res.data);
+        passdata(res.data);
+      })
+      .catch(() => console.log("error"));
+  }, []);
+
+  function passdata(resultdata) {
+    let result = [];
+    for (let key in resultdata) {
+      let array = resultdata[key];
+      let a = array[array.length - 1];
+      let obj = {
+        country_name: key,
+        upto_today: a.date,
+        conformed_cases: a.confirmed,
+        recovered_cases: a.recovered,
+        deaths: a.deaths,
+      };
+      result.push(obj);
+    }
+    axios
+      .post("http://localhost:2020/app/updatecoviddata", result)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((res) => console.log("erroe"));
+  }
+  console.log(data);
+  let abc = data.Afghanistan;
+  console.log(abc);
+  useEffect(() => {
+    axios
+      .get("http://localhost:2020/app/getusersdata")
+      .then((res) => {
+        setusersData(res.data);
+        console.log(res.data);
+      })
+      .catch(() => console.log("erroe occured"));
+  }, []);
+
+  const users = [
+    {
+      id: 1,
+      fname: "abc",
+      lname: "sda",
+      email: "abc@gmail.comm",
+      addr: "hyd",
+      ip: "192.234.90",
+    },
+    {
+      id: 2,
+      fname: "abc",
+      lname: "sdfsf",
+      email: "abc@gmail.comm",
+      addr: "hyd",
+      ip: "192.169.0",
+    },
+    {
+      id: 3,
+      fname: "abc",
+      lname: "dgdlgk",
+      email: "abc@gmail.comm",
+      addr: "hyd",
+      ip: "192.168.0",
+    },
+  ];
+  return (
+    <div>
+      <Table striped bordered hover size="sm" variant="blue">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>FName</th>
+            <th>LName</th>
+            <th>Email</th>
+            <th>Domain</th>
+            <th>IPAddress</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usersData.map((e) => (
+            <tr>
+              <td>{e.id}</td>
+              <td>{e.first_name}</td>
+              <td>{e.last_name}</td>
+              <td>{e.email}</td>
+              <td>{e.domain}</td>
+              <td>{e.ip_address}</td>
+              <td>
+                <i
+                  className="fa fa-pencil"
+                  aria-hidden="true"
+                  style={{ fontSize: "23px", color: "green" }}
+                ></i>
+              </td>
+              <td>
+                <i
+                  className="fa fa-trash"
+                  aria-hidden="true"
+                  style={{ fontSize: "23px", color: color }}
+                  onMouseOver={() => setColor("red")}
+                  onMouseLeave={() => setColor("gray")}
+                ></i>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+}
+
+export default UsersData;

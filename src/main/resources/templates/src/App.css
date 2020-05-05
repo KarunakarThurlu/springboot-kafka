@@ -1,38 +1,58 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  align-content: center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.homenav {
+  height: 35px;
+  background: rgba(102, 96, 102, 0.993);
+  text-decoration-color: beige;
+}
+.navbar-light .navbar-nav .nav-link {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.login,
+.register {
+  overflow: visible;
+  width: 30%;
+  padding: 8px 12px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loginaplly,
+.signupapply {
+  background-color: black;
+  overflow: visible;
+  width: 30%;
+  color: blanchedalmond;
+  padding: 8px 12px;
+}
+.errmsg {
+  color: red;
+  margin-bottom: 10px;
+}
+.successmsg {
+  color: green;
+  margin-bottom: 10px;
+}
+.navfont {
+  font-size: 20px;
+  color: white;
+  font-weight: 800;
+  text-decoration: none;
+}
+.homenavfont {
+  font-size: 15px;
+  color: white;
+  font-weight: 800;
+  text-decoration: none;
+}
+.nav-item3 {
+  justify-content: right;
+}
+.items {
+  text-decoration-color: aliceblue;
+}
+.co {
+  padding: 10px;
+  margin: 90px;
+  border: 10px;
 }
