@@ -3,14 +3,13 @@ import "./App.css";
 import Header from "./components/Header";
 import "font-awesome/css/font-awesome.min.css";
 import Home from "./components/Home";
-import Contactus from "./components/Contactus";
-import DashBoard from "./components/DashBoard";
+import StoryBoards from "./components/StoryBoard";
 import Aboutus from "./components/Aboutus";
-import Register from "./components/Register";
+import Reports from "./components/Resports";
 import Login from "./components/LogIn";
 import UsersData from "./components/UsersData";
 import Attributes from "./components/Attributes";
-import Visualization from "./components/Visualization";
+
 import Logout from "./components/Logout";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 require("bootstrap/dist/css/bootstrap.css");
@@ -24,15 +23,16 @@ function App() {
           <Route exact path="/analytics" component={Home} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/aboutus" component={Aboutus} />
-          <Route exact path="/register" component={Register} />
+          <Route exact path="/reports" component={Reports} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/usersdata" component={UsersData} />
           <Route exact path="/visualization" component={Attributes} />
-          <Route exact path="/dashboard" component={DashBoard} />
+          <Route exact path="/analytics/storyboards" component={StoryBoards} />
         </Switch>
       </div>
     </Router>
   );
 }
-
+//https://bezkoder.com/spring-boot-react-jwt-auth/
 export default App;

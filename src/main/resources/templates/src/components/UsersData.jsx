@@ -50,36 +50,9 @@ function UsersData() {
       })
       .catch(() => console.log("erroe occured"));
   }, []);
-
-  const users = [
-    {
-      id: 1,
-      fname: "abc",
-      lname: "sda",
-      email: "abc@gmail.comm",
-      addr: "hyd",
-      ip: "192.234.90",
-    },
-    {
-      id: 2,
-      fname: "abc",
-      lname: "sdfsf",
-      email: "abc@gmail.comm",
-      addr: "hyd",
-      ip: "192.169.0",
-    },
-    {
-      id: 3,
-      fname: "abc",
-      lname: "dgdlgk",
-      email: "abc@gmail.comm",
-      addr: "hyd",
-      ip: "192.168.0",
-    },
-  ];
   return (
     <div>
-      <Table striped bordered hover size="sm" variant="blue">
+      <Table striped hover size="sm" variant="blue">
         <thead>
           <tr>
             <th>ID</th>

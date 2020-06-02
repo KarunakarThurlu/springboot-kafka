@@ -52,7 +52,30 @@
   text-decoration-color: aliceblue;
 }
 .co {
-  padding: 10px;
-  margin: 90px;
-  border: 10px;
+  padding: 20px;
+  display: inline-block;
+  width: 15em;
+  height: 11em;
+  box-shadow: rgb(199, 127, 18);
+  background-color: rgb(184, 178, 169);
+  text-align: center;
+  margin: 20px;
+  overflow: auto;
+}
+.countAsave {
+  margin-top: 3em;
+}
+.popup-content {
+  height: 15em;
+  width: 15em;
+  background-color: aqua;
+}
+.form-control {
+  width: 20%;
+}
+.arrtform {
+  align-self: start;
+  align-items: center;
+  margin-left: 35%;
+  margin-top: 5%;
 }

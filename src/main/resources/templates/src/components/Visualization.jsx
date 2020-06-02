@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsMore from "highcharts/highcharts-more";
 import HighchartsReact from "highcharts-react-official";
+import Savestoryboard from "./Savestoryboard";
+
+import "../App.css";
 
 HighchartsMore(Highcharts);
 
 function Visualization(props) {
-  console.log(props);
+  let [name, setName] = useState([]);
+  let handlechange = (e) => {
+    setName(e.target.value);
+  };
+  let handleclick = (e) => {
+    console.log(name + "====");
+    e.preventDefault();
+  };
+
+  let data = {
+    xaxis: props.value.xaxistitle,
+    yaxis: props.value.yaxistitle,
+  };
+  sessionStorage.setItem("chartsdata", JSON.stringify(data));
   let charttitle = props.value.yaxistitle + " by " + props.value.xaxistitle;
+  let piedata = [];
+  let o = [];
+  for (let i = 0; i < props.value.series.length; i++) {
+    let obj = {
+      y: parseInt(props.value.yaxis[i]),
+      name: props.value.xaxis[i],
+    };
+    piedata.push(obj);
+  }
+  let p = { data: piedata, name: props.value.yaxistitle };
+  o.push(p);
   const spline = {
     chart: {
       type: "spline",
@@ -135,53 +162,57 @@ function Visualization(props) {
       {
         type: "column",
         name: props.value.yaxistitle,
-        data: [1, 2, 4, 5, 6, 7, 8, 9, 10],
+        data: props.value.series,
       },
       {
         type: "column",
-        name: props.value.yaxistitle,
-        data: [1, 8, 2, 7, 3, 6, 4, 5],
+        name: props.value.xaxistitle,
+        data: props.value.xaxis,
       },
     ],
   };
-  const line = {
+  const pie = {
     chart: {
       type: "pie",
     },
     yAxis: {
       gridLineWidth: 0,
+      name: props.value.yaxis,
       title: {
-        text: "Papulation",
+        text: props.value.yaxistitle,
       },
     },
     xAxis: {
-      categories: [
-        "Chaina",
-        "India",
-        "Russia",
-        "Austreliya",
-        "Amereka",
-        "Brezil",
-        "Canada",
-        "Singapure",
-      ],
+      categories: props.value.xaxis,
       title: {
-        text: "Countryname",
+        text: props.value.xaxistitle,
       },
     },
-    colors: ["#007799", "#770077", "#990077", "#779988"],
+    colors: [
+      "#000099",
+      "#000877",
+      "#990077",
+      "#777088",
+      "#449066",
+      "#440066",
+      "#006677",
+      "#112233",
+    ],
     legend: {
       enabled: true,
       align: "right",
     },
     title: {
-      text: "linechart",
+      text: charttitle,
     },
-    series: [
-      {
-        data: [100, 25, 47, 70, 80, 29, 10],
+    series: o,
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+        },
       },
-    ],
+    },
   };
 
   return (
@@ -203,14 +234,19 @@ function Visualization(props) {
           <div className="col-4">
             <HighchartsReact
               highcharts={Highcharts}
-              options={polar}
+              options={pie}
             ></HighchartsReact>
           </div>
-          <div className="col-3">
-            <h4 style={{ color: "red" }}>
-              Total {props.value.yaxistitle} in the world is $
-              {props.value.count}
-            </h4>
+          <div className="col-6">
+            <div className="countAsave">
+              <h4 style={{ color: "blue" }}>
+                Total {props.value.yaxistitle} in the world is{" "}
+                {props.value.count}
+              </h4>
+            </div>
+          </div>
+          <div className="col-6">
+            <Savestoryboard sdata={data} />
           </div>
         </div>
       </div>

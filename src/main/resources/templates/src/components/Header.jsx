@@ -3,7 +3,7 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignJustify } from "@fortawesome/free-solid-svg-icons";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 function Header() {
   return (

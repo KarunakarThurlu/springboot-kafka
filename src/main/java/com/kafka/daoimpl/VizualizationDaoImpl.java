@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import com.kafka.dao.IVizualizationDao;
@@ -74,6 +74,7 @@ public class VizualizationDaoImpl implements IVizualizationDao {
 
 			resultobj.put("xaxistitle",xaxis);
 			resultobj.put("yaxistitle",yaxis);
+			
 			finalresult.add(result);
 			String aggr=(String) obj.get("aggrigation");
 			String countquery=" select sum("+yaxis+") from covid19table";
@@ -135,6 +136,49 @@ public class VizualizationDaoImpl implements IVizualizationDao {
 		}
 		
 		return "done";
+	}
+
+	@Override
+	public String saveStoryBoard(String data) {
+		try {
+			String vi=data;
+			JSONObject obj=(JSONObject) parser.parse(data);
+			String sname=(String) obj.get("storyboardname");
+		    String query="insert into visualization(sb_name,visualization_details) values(?,?)";
+		    template.update(query,sname,obj.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "updated";
+	}
+
+	@Override
+	public String getSavedStoryboardData() {
+		String query="select sb_name from visualization";
+		@SuppressWarnings("unchecked")
+		List<JSONObject>result=template.query(query, (rs,rowNNum)->{
+			JSONObject obj=new JSONObject();
+			obj.put("sb_name",rs.getString("sb_name"));
+			return obj;
+		});
+		System.out.println(result);
+		return result.toString();
+	}
+
+	@Override
+	public String viewStoryBoard(String data) {
+		String res="";
+		try {
+			JSONObject obj=(JSONObject) parser.parse(data);
+			String sb_name=(String) obj.get("sb_name");
+			String query="select visualization_details from visualization where sb_name=?";
+			res=template.queryForObject(query,new Object[] {sb_name},String.class);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 }

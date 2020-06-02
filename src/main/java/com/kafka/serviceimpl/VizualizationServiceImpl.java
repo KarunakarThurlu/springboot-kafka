@@ -58,4 +58,25 @@ public class VizualizationServiceImpl implements IVizualizationService {
 		return res;
 	}
 
+	@Override
+	public String saveStoryBoard(String data) {
+		String res=dao.saveStoryBoard(data);
+		return res;
+	}
+
+	@Override
+	public String getSavedStoryboardData() {
+		String res=dao.getSavedStoryboardData();
+		return res;
+	}
+
+	@Override
+	public String viewStoryBoard(String data) {
+		String res=dao.viewStoryBoard(data);
+		System.out.println(res);
+		String reusult=dao.selectedAttributesData(res);
+		return reusult;
+	}
+	
+
 }

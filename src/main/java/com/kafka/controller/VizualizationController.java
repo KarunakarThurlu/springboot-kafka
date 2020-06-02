@@ -41,4 +41,24 @@ public class VizualizationController {
 		System.out.println(data);
 		return service.updateCovidData(data);
 	}
+	@RequestMapping("/savestoryboard")
+	public String saveStoryBoard(@RequestBody String data) {
+		System.out.println(data);
+		String res=service.saveStoryBoard(data);
+		return res;
+	}
+	@RequestMapping("/getsavedstoryboarddata")
+	public String getSavedStoryboardData() {
+		String res=service.getSavedStoryboardData();
+		
+		return res;
+	}
+	
+	@RequestMapping("/viewstoryboard")
+	public String viewStoryBoard(@RequestBody String data) {
+		String res=service.viewStoryBoard(data);
+		
+		return res;
+		
+	}
 }

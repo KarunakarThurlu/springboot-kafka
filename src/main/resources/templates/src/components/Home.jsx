@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <nav className="homenav navbar navbar-expand-sm navbar-light justify-content-center">
+    <nav className="homenav navbar navbar-expand-sm navbar-light justify-content-center stickey">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link" to="/register">
-            Registration
+          <Link className="nav-link" to="/reports">
+            Reports
           </Link>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <Link className="nav-link" to="/login">
             Login
           </Link>
@@ -20,15 +20,20 @@ function Home() {
           <Link className="nav-link" to="/usersdata">
             UsersData
           </Link>
-        </li>
+        </li> */}
         <li className="nav-item">
           <Link className="nav-link" to="/visualization">
             Visualization
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
-            DashBoard
+          <Link className="nav-link" to="/usersdata">
+            Usersdata
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/analytics/storyboards">
+            StoryBoards
           </Link>
         </li>
       </ul>
