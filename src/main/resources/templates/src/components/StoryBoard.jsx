@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import apiConfig from "../apiconfig/config";
 import Visualization from "./Visualization";
-
+import Header from "./Header";
 function StoryBoards() {
   let [SB_Names, setSB_Names] = useState([]);
   let [SB_data, setSB_data] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:2020/app/getsavedstoryboarddata")
+      .get(`${apiConfig.baseUrl}getsavedstoryboarddata`)
       .then((res) => {
         setSB_Names(res.data);
         console.log(res.data);
@@ -23,7 +24,7 @@ function StoryBoards() {
       sb_name: name,
     };
     axios
-      .post("http://localhost:2020/app/viewstoryboard", data)
+      .post(`${apiConfig.baseUrl}viewstoryboard`, data)
       .then((res) => {
         setSB_data(res.data);
       })
@@ -31,19 +32,22 @@ function StoryBoards() {
   };
   let dashboard = () => {
     return (
-      <div className="container-fluid">
-        <div class="row justify-content-around">
-          <ul>
-            {SB_Names.map((e) => (
-              <li className="co">
-                {e.sb_name}
-                <br />
-                <button value={e.sb_name} onClick={(e) => handleclick(e)}>
-                  View Storyboard
-                </button>
-              </li>
-            ))}
-          </ul>
+      <div>
+        <Header />
+        <div className="container-fluid">
+          <div class="row justify-content-around">
+            <ul>
+              {SB_Names.map((e) => (
+                <li className="co">
+                  {e.sb_name}
+                  <br />
+                  <button value={e.sb_name} onClick={(e) => handleclick(e)}>
+                    View Storyboard
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     );

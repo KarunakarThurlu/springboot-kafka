@@ -11,7 +11,7 @@ import com.kafka.iservice.IVizualizationService;
 
 @RestController
 @RequestMapping("/app")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin
 public class VizualizationController {
 
 	@Autowired

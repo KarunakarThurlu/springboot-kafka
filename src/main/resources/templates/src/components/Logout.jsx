@@ -2,6 +2,7 @@ import React from "react";
 import Usmap from "./Usmap";
 import "../App.css";
 import Worldmap from "./Worldmap";
+import Login from "./LogIn";
 
 import "../App.css";
 function Logout() {

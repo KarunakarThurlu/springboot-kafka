@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import Visualization from "./Visualization";
 import axios from "axios";
 import Reports from "./Resports";
+import apiConfig from "../apiconfig/config";
 import "../App.css";
+import Header from "./Header";
 /*
 axios.post(url, {
   headers: {
@@ -24,7 +26,7 @@ function Attributes() {
   console.log("intitial state " + attr);
   useEffect(() => {
     axios
-      .get("http://localhost:2020/app/attributes")
+      .get(`${apiConfig.baseUrl}attributes`)
       .then((res) => {
         setAttr(res.data);
         console.log(attr);
@@ -35,7 +37,7 @@ function Attributes() {
     e.preventDefault();
     console.log(result);
     axios
-      .post("http://localhost:2020/app/selectedAttributes", result)
+      .post(`${apiConfig.baseUrl}selectedAttributes`, result)
       .then((res) => {
         setResponse(res.data);
         console.log(response);
@@ -53,6 +55,7 @@ function Attributes() {
   let AttributesSelection = () => {
     return (
       <div className="App">
+        <Header />
         <div>
           <form className="arrtform">
             <div className="form-group row">

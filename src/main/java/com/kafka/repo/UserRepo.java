@@ -7,4 +7,6 @@ import com.kafka.model.User;
 public interface UserRepo extends JpaRepository<User, Integer> {
 	public User findByUserEmail(String email);
 
+	public User findByUserName(String username);
+
 }

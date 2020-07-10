@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
+import App from "../App";
+import history from "../history";
 export default class LogIn extends Component {
   constructor(props) {
     super(props);
@@ -11,22 +14,34 @@ export default class LogIn extends Component {
     let fields = this.state.fields;
     fields[e.target.name] = e.target.value;
     this.setState({
+      redirectTo: "/home",
       fields,
     });
   }
   handleSubmit(e) {
     e.preventDefault();
     if (this.validateForm()) {
+      /* axios
+      .post(`${apiConfig.baseUrl}viewstoryboard`, data)
+      .then((res) => {
+          (res.data);
+      })
+      .catch((e) => console.log("error"));*/
       let fields = {};
       fields["email"] = "";
       fields["password"] = "";
       this.setState({ fields: fields });
       if (true) {
-        this.props.history.push("/analytics");
+        if (this.props.history === undefined) {
+          history.push("/home");
+        } else {
+          this.props.history.push("/hom");
+        }
       }
       console.log(this.state.fields);
     }
   }
+
   validateForm() {
     let fields = this.state.fields;
     let errors = {};
@@ -55,7 +70,7 @@ export default class LogIn extends Component {
     return (
       <div className="container" style={{ paddingTop: "100px" }}>
         <h3 align="center">Signin</h3>
-        <div className="container" style={{ paddingTop: "15px" }}>
+        <div className="logincontainer" style={{ paddingTop: "15px" }}>
           <form>
             <input
               type="email"

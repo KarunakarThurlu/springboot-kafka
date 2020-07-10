@@ -3,6 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsMore from "highcharts/highcharts-more";
 import HighchartsReact from "highcharts-react-official";
 import Savestoryboard from "./Savestoryboard";
+import Header from "./Header";
 
 import "../App.css";
 
@@ -217,6 +218,7 @@ function Visualization(props) {
 
   return (
     <div>
+      <Header></Header>
       <div className="container-fluid">
         <div className="row">
           <div className="col-4" style={{ height: "10px" }}>

@@ -1,9 +1,12 @@
 import React from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
+import Header from "./Header";
 
 function Home() {
   return (
+    <div>
+    <Header></Header>
     <nav className="homenav navbar navbar-expand-sm navbar-light justify-content-center stickey">
       <ul className="navbar-nav">
         <li className="nav-item">
@@ -38,6 +41,7 @@ function Home() {
         </li>
       </ul>
     </nav>
+    </div>
   );
 }
 

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useEffect } from "react";
+import apiConfig from "../apiconfig/config";
 import axios from "axios";
+import Header from "./Header";
 
 function UsersData() {
   const [usersData, setusersData] = useState([]);
@@ -32,7 +34,7 @@ function UsersData() {
       result.push(obj);
     }
     axios
-      .post("http://localhost:2020/app/updatecoviddata", result)
+      .post(`${apiConfig.baseUrl}updatecoviddata`, result)
       .then((res) => {
         console.log(res.data);
       })
@@ -43,7 +45,7 @@ function UsersData() {
   console.log(abc);
   useEffect(() => {
     axios
-      .get("http://localhost:2020/app/getusersdata")
+      .get(`${apiConfig.baseUrl}getusersdata`)
       .then((res) => {
         setusersData(res.data);
         console.log(res.data);
@@ -52,6 +54,7 @@ function UsersData() {
   }, []);
   return (
     <div>
+      <Header/>
       <Table striped hover size="sm" variant="blue">
         <thead>
           <tr>

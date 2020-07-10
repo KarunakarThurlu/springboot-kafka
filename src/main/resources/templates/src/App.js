@@ -15,11 +15,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 require("bootstrap/dist/css/bootstrap.css");
 
 function App() {
+  let auth = sessionStorage.getItem("auth");
   return (
     <Router>
       <div className="App">
-        <Header />
+       
         <Switch>
+          <Route exact path="/home" component={Home} />
           <Route exact path="/analytics" component={Home} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/aboutus" component={Aboutus} />

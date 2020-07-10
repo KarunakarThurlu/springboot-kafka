@@ -5,6 +5,7 @@ import HighchartsReact from "highcharts-react-official";
 import Savestoryboard from "./Savestoryboard";
 import ChangeCharttype from "./ChangeCharttype";
 import axios from "axios";
+import Header from "./Header";
 
 import "../App.css";
 
@@ -20,7 +21,7 @@ function Reports(props) {
   };
   const spline = {
     chart: {
-      type: "spline",
+      type: "area",
       /*sessionStorage.getItem("chartType") != undefined
           ? sessionStorage.getItem("chartType")
           : "column"*/
@@ -65,6 +66,7 @@ function Reports(props) {
 
   return (
     <div>
+      <Header/>
       <HighchartsReact
         highcharts={Highcharts}
         options={spline}

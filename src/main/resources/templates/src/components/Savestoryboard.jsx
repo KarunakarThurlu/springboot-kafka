@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Popup from "reactjs-popup";
 import axios from "axios";
+import apiConfig from "../apiconfig/config";
 import "../App.css";
 function Savestoryboard(props) {
   let [name, setName] = useState([]);
@@ -20,7 +21,7 @@ function Savestoryboard(props) {
     let a = JSON.stringify(finaldata);
     let b = JSON.parse(a);
     axios
-      .post("http://localhost:2020/app/savestoryboard", b)
+      .post(`${apiConfig.baseUrl}savestoryboard`, b)
       .then((res) => {
         console.log(res.data);
       })

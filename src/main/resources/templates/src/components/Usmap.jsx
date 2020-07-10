@@ -4,6 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
 import Highmap from "highcharts/modules/map";
 import mapDataUS from "@highcharts/map-collection/countries/us/us-all.geo.json";
+import Header from "./Header";
 
 Highmap(Highcharts);
 //India-https://api.rootnet.in/covid19-in/stats/latest
@@ -96,6 +97,7 @@ function Usmap() {
   };
   return (
     <div>
+      <Header></Header>
       <HighchartsReact
         highcharts={Highcharts}
         options={mapOptions}
