@@ -3,6 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
 import Highmap from "highcharts/modules/map";
+import Header from"./Header";
 import worldMap from "@highcharts/map-collection/custom/world.geo.json";
 Highmap(Highcharts);
 
@@ -52,6 +53,7 @@ function Worldmap() {
   };
   return (
     <div>
+      <Header/>
       <HighchartsReact
         highcharts={Highcharts}
         options={mapOptions}

@@ -53,14 +53,15 @@
 }
 .co {
   padding: 20px;
+  text-decoration-color: whitesmoke;
   display: inline-block;
+  list-style: none;
+  margin-left: 45px;
   width: 15em;
   height: 11em;
-  box-shadow: rgb(199, 127, 18);
-  background-color: rgb(184, 178, 169);
-  text-align: center;
-  margin: 20px;
-  overflow: auto;
+  background-color: rgb(173, 175, 179);
+  box-shadow: 15px 5px 15px 0px rgb(1, 10, 10, 10);
+  margin-top: 20px;
 }
 .countAsave {
   margin-top: 3em;
@@ -81,4 +82,23 @@
 }
 .logincontainer {
   text-align: center;
+}
+a.signuplink {
+  margin: 30px;
+  border: 20px;
+  color: green;
+  font-size: 19px;
+}
+a.forgotpasswordlink {
+  margin: 30px;
+  border: 20px;
+  color: red;
+  font-size: 19px;
+}
+.sbview {
+  border-radius: 30px;
+  color: rgb(49, 35, 17);
+  height: 40px;
+  width: 10em;
+  box-shadow: 0px 5px 15px 0px rgba(8, 8, 2, 0.3);
 }

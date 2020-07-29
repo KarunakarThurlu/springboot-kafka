@@ -2,17 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Visualization from "./Visualization";
 import axios from "axios";
-import Reports from "./Resports";
+import Reports from "./Report";
 import apiConfig from "../apiconfig/config";
 import "../App.css";
 import Header from "./Header";
-/*
-axios.post(url, {
-  headers: {
-    'Authorization': `Bearer ${token}`
-  }
-})
-*/
+
 function Attributes() {
   let [attr, setAttr] = useState([]);
   let [result, setResult] = useState({
@@ -26,7 +20,11 @@ function Attributes() {
   console.log("intitial state " + attr);
   useEffect(() => {
     axios
-      .get(`${apiConfig.baseUrl}attributes`)
+      .post(`${apiConfig.baseUrl}attributes`, null, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         setAttr(res.data);
         console.log(attr);
@@ -37,7 +35,11 @@ function Attributes() {
     e.preventDefault();
     console.log(result);
     axios
-      .post(`${apiConfig.baseUrl}selectedAttributes`, result)
+      .post(`${apiConfig.baseUrl}selectedAttributes`, result, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         setResponse(res.data);
         console.log(response);

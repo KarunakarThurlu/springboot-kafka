@@ -3,7 +3,7 @@ import "../App.css";
 function Register() {
   return (
     <div className="container" style={{ paddingTop: "50px" }}>
-      <h3 align="center">Registration Page</h3>
+      <h3 align="center">Signup Page</h3>
       <div className="container" style={{ paddingTop: "15px" }}>
         <input
           type="text"

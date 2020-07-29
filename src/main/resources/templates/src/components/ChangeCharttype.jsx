@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import axios from "axios";
-import Reports from "./Resports";
+import Reports from "./Report";
+import apiConfig from "../apiconfig/config";
 
 function ChangeCharttype(props) {
   let chartType;
@@ -12,7 +13,11 @@ function ChangeCharttype(props) {
     e.preventDefault();
 
     axios
-      .post("http://localhost:2020/app/selectedAttributes", chartDataa)
+      .post(`${apiConfig.baseUrl}selectedAttributes`, chartDataa, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         setChartdata(res.data);
         console.log(chartdata);

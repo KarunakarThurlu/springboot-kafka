@@ -65,11 +65,22 @@ public class VizualizationServiceImpl implements IVizualizationService {
 	}
 
 	@Override
+	public String savaReport(String data) {
+		String res=dao.saveReport(data);
+		return res;
+	}
+	@Override
 	public String getSavedStoryboardData() {
 		String res=dao.getSavedStoryboardData();
 		return res;
 	}
 
+	@Override
+	public String getSavedReportData() {
+		String res=dao.getSavedReportdData();
+		return res;
+	}
+	
 	@Override
 	public String viewStoryBoard(String data) {
 		String res=dao.viewStoryBoard(data);
@@ -77,6 +88,13 @@ public class VizualizationServiceImpl implements IVizualizationService {
 		String reusult=dao.selectedAttributesData(res);
 		return reusult;
 	}
-	
+
+	@Override
+	public String viewReport(String data) {
+		String res=dao.viewReport(data);
+		System.out.println(res);
+		String reusult=dao.selectedAttributesData(res);
+		return reusult;
+	}
 
 }

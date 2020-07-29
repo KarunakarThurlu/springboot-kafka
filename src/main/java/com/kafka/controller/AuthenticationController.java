@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kafka.iservice.IUserService;
 import com.kafka.jwtutil.JwtUtil;
 import com.kafka.model.AuthToken;
 import com.kafka.model.User;
@@ -29,8 +28,7 @@ public class AuthenticationController {
     @Autowired
     private JwtUtil jwtTokenUtil;
     
-    @Autowired
-    private IUserService service;
+
     
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody User user,HttpSession session) throws AuthenticationException {

@@ -34,7 +34,9 @@ function UsersData() {
       result.push(obj);
     }
     axios
-      .post(`${apiConfig.baseUrl}updatecoviddata`, result)
+      .post(`${apiConfig.baseUrl}updatecoviddata`, result,{headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+      }})
       .then((res) => {
         console.log(res.data);
       })
@@ -45,7 +47,9 @@ function UsersData() {
   console.log(abc);
   useEffect(() => {
     axios
-      .get(`${apiConfig.baseUrl}getusersdata`)
+      .post(`${apiConfig.baseUrl}getusersdata`,null,{headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+      }})
       .then((res) => {
         setusersData(res.data);
         console.log(res.data);

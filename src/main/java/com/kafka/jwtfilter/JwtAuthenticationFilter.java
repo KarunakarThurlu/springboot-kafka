@@ -4,6 +4,7 @@ import static com.kafka.jwtutil.JwtConstants.HEADER_STRING;
 import static com.kafka.jwtutil.JwtConstants.TOKEN_PREFIX;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -37,7 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 
-		String header = request.getHeader(HEADER_STRING);
+		String header = request.getHeader("Authorization");
+		Enumeration<String> h1=request.getHeaders("Authorization");
 		String username = null;
 		String authToken = null;
 		if (header != null && header.startsWith(TOKEN_PREFIX)) {

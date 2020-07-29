@@ -152,6 +152,20 @@ public class VizualizationDaoImpl implements IVizualizationDao {
 		}
 		return "updated";
 	}
+    
+	@Override
+	public String saveReport(String data) {
+		try {
+			JSONObject obj=(JSONObject) parser.parse(data);
+			String sname=(String) obj.get("storyboardname");
+		    String query="insert into reports(report_name,report_details) values(?,?)";
+		    template.update(query,sname,obj.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Saved";
+	}
 
 	@Override
 	public String getSavedStoryboardData() {
@@ -165,6 +179,21 @@ public class VizualizationDaoImpl implements IVizualizationDao {
 		System.out.println(result);
 		return result.toString();
 	}
+	
+
+	@Override
+	public String getSavedReportdData() {
+		String query="select report_name from reports";
+		@SuppressWarnings("unchecked")
+		List<JSONObject>result=template.query(query, (rs,rowNNum)->{
+			JSONObject obj=new JSONObject();
+			obj.put("report_name",rs.getString("report_name"));
+			return obj;
+		});
+		System.out.println(result);
+		return result.toString();
+	}
+
 
 	@Override
 	public String viewStoryBoard(String data) {
@@ -174,6 +203,21 @@ public class VizualizationDaoImpl implements IVizualizationDao {
 			String sb_name=(String) obj.get("sb_name");
 			String query="select visualization_details from visualization where sb_name=?";
 			res=template.queryForObject(query,new Object[] {sb_name},String.class);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public String viewReport(String data) {
+		String res="";
+		try {
+			JSONObject obj=(JSONObject) parser.parse(data);
+			String report_name=(String) obj.get("report_name");
+			String query="select report_details from reports where report_name=?";
+			res=template.queryForObject(query,new Object[] {report_name},String.class);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
-import App from "../App";
-import history from "../history";
+import apiconfig from "../apiconfig/config";
+import { Link } from "react-router-dom";
+import "../App.css";
 export default class LogIn extends Component {
   constructor(props) {
     super(props);
-    this.state = { fields: { email: "", password: "" }, errors: {} };
+    this.state = {
+      fields: { userEmail: "", userPwd: "" },
+      errors: {},
+      response: {},
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -14,31 +18,28 @@ export default class LogIn extends Component {
     let fields = this.state.fields;
     fields[e.target.name] = e.target.value;
     this.setState({
-      redirectTo: "/home",
       fields,
     });
   }
   handleSubmit(e) {
     e.preventDefault();
+    let errors = {};
     if (this.validateForm()) {
-      /* axios
-      .post(`${apiConfig.baseUrl}viewstoryboard`, data)
-      .then((res) => {
-          (res.data);
-      })
-      .catch((e) => console.log("error"));*/
-      let fields = {};
-      fields["email"] = "";
-      fields["password"] = "";
-      this.setState({ fields: fields });
-      if (true) {
-        if (this.props.history === undefined) {
-          history.push("/home");
-        } else {
-          this.props.history.push("/hom");
-        }
-      }
-      console.log(this.state.fields);
+      axios
+        .post(`${apiconfig.baseUrl}login`, this.state.fields)
+        .then((res) => {
+          if (res.data.message === "Bad credentials") {
+            errors["response"] = "Invalid UserName Or Password";
+            this.setState({ errors: errors });
+            return false;
+          } else {
+            sessionStorage.setItem("token", res.data.token);
+            sessionStorage.setItem("isAuthenticated", true);
+            this.props.history.push("/home");
+          }
+          console.log(res.data);
+        })
+        .catch((e) => console.log("error"));
     }
   }
 
@@ -46,22 +47,22 @@ export default class LogIn extends Component {
     let fields = this.state.fields;
     let errors = {};
     let isvalid = true;
-    if (!fields["email"]) {
+    if (!fields["userEmail"]) {
       isvalid = false;
-      errors["email"] = "Plaese enter email";
+      errors["userEmail"] = "Plaese enter email";
     }
-    if (typeof fields["email"] !== undefined) {
+    if (typeof fields["userEmail"] !== undefined) {
       var pattern = new RegExp(
         /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
       );
-      if (!pattern.test(fields["email"]) && fields["email"] !== "") {
+      if (!pattern.test(fields["userEmail"]) && fields["userEmail"] !== "") {
         isvalid = false;
-        errors["email"] = "please enter currect mailid";
+        errors["userEmail"] = "please enter currect mailid";
       }
     }
-    if (!fields["password"]) {
+    if (!fields["userPwd"]) {
       isvalid = false;
-      errors["password"] = "Please enter Password";
+      errors["userPwd"] = "Please enter Password";
     }
     this.setState({ errors: errors });
     return isvalid;
@@ -74,33 +75,41 @@ export default class LogIn extends Component {
           <form>
             <input
               type="email"
-              name="email"
+              name="userEmail"
               className="login"
               value={this.state.fields.email}
               placeholder="useremail"
               onChange={this.handleChange}
               id="useremail"
             ></input>
-            <div className="errmsg">{this.state.errors.email}</div>
+            <div className="errmsg">{this.state.errors.userEmail}</div>
 
             <input
               type="password"
-              name="password"
+              name="userPwd"
               className="login"
               value={this.state.fields.password}
               placeholder="userpassword"
               onChange={this.handleChange}
               id="userpassword"
             ></input>
-            <div className="errmsg">{this.state.errors.password}</div>
+            <div className="errmsg">{this.state.errors.userPwd}</div>
 
             <input
               type="button"
               className="loginaplly"
+              name="response"
               id="submit"
-              value="Login"
+              value="Signin"
               onClick={this.handleSubmit}
             ></input>
+            <div className="errmsg">{this.state.errors.response}</div>
+            <Link className="forgotpasswordlink" to="/forgotpassword">
+              Forgot password?
+            </Link>
+            <Link className="signuplink" to="/register">
+              Signup
+            </Link>
           </form>
         </div>
       </div>

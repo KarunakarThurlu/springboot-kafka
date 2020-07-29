@@ -20,15 +20,35 @@ function Savestoryboard(props) {
     };
     let a = JSON.stringify(finaldata);
     let b = JSON.parse(a);
-    axios
-      .post(`${apiConfig.baseUrl}savestoryboard`, b)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((res) => {
-        console.log("error");
-      });
-    console.log(a);
+    if (props.sdata.visualizationType === "report") {
+      axios
+        .post(`${apiConfig.baseUrl}savereport`, b, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log("error");
+        });
+      console.log(a);
+    } else {
+      axios
+        .post(`${apiConfig.baseUrl}savestoryboard`, b, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log("error");
+        });
+      console.log(a);
+    }
   };
   return (
     <div className="countAsave">

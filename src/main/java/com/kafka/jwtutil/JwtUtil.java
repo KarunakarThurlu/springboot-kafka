@@ -26,7 +26,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtil {
 
-	public String generateToken(Authentication authentication) {
+	public  String generateToken(Authentication authentication) {
 		final String authorities = authentication.getAuthorities().stream()
 				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.joining(","));

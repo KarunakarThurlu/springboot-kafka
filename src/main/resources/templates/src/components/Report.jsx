@@ -11,14 +11,16 @@ import "../App.css";
 
 HighchartsMore(Highcharts);
 
-function Reports(props) {
+function Report(props) {
   let charttitle = props.value.yaxistitle + " by " + props.value.xaxistitle;
   let [name, setName] = useState([]);
   let data = {
     xaxis: props.value.xaxistitle,
     yaxis: props.value.yaxistitle,
     aggrigation: "sum",
+    visualizationType: "report",
   };
+  sessionStorage.setItem("chartsdata", JSON.stringify(data));
   const spline = {
     chart: {
       type: "area",
@@ -65,8 +67,7 @@ function Reports(props) {
   };
 
   return (
-    <div>
-      <Header/>
+    <div className="report">
       <HighchartsReact
         highcharts={Highcharts}
         options={spline}
@@ -76,11 +77,11 @@ function Reports(props) {
           <div className="col-6">
             <Savestoryboard sdata={data} />
           </div>
-          {/* <ChangeCharttype chartdata={data} /> */}
+          {/*<ChangeCharttype chartdata={data} />*/}
         </div>
       </div>
     </div>
   );
 }
 
-export default Reports;
+export default Report;

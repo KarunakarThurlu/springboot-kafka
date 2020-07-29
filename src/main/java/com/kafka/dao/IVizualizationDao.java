@@ -8,5 +8,8 @@ public interface IVizualizationDao {
 	public String saveStoryBoard(String data);
 	public String getSavedStoryboardData();
 	public String viewStoryBoard(String data);
+	public String saveReport(String data);
+	public String getSavedReportdData();
+	public String viewReport(String data);
 	
 }

@@ -64,11 +64,11 @@ public class SpringBootJwtSecurityConfiguration extends WebSecurityConfigurerAda
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);*/
 		http.cors().and().csrf().disable().
 		authorizeRequests()
-		.antMatchers("/kafka").permitAll()
-		//.anyRequest().authenticated()
+		.antMatchers("/app/login").permitAll()
+		.anyRequest().authenticated()
 		.and()
 		.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http
 		.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
